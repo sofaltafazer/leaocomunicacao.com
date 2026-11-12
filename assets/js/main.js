@@ -97,7 +97,7 @@ if ('IntersectionObserver' in window) {
   videos.forEach((v) => vObs.observe(v));
 
   // Entrada suave
-  const alvos = document.querySelectorAll('.head, .card, .consult__item, .stats, .why > *, .reel, .gallery img, .clients li, .cta');
+  const alvos = document.querySelectorAll('.head, .card, .consult__item, .stats, .why > *, .founder > *, .reel, .gallery img, .clients li, .cta');
   alvos.forEach((el) => el.classList.add('reveal'));
   const rObs = new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting }) => {
