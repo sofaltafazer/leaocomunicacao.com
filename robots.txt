@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://leaocomunicacao.com/sitemap.xml
