@@ -62,6 +62,19 @@ if (slides.length > 1 && dots) {
   document.addEventListener('visibilitychange', () => (document.hidden ? clearInterval(timer) : reiniciar()));
 }
 
+// Vídeos em loop (sem som)
+const videos = [...document.querySelectorAll('.reel video, .why__media video')];
+const tocar = (v) => {
+  v.muted = true;
+  const p = v.play();
+  if (p && p.catch) p.then(() => v.parentElement.classList.remove('needs-tap')).catch(() => v.parentElement.classList.add('needs-tap'));
+};
+videos.forEach((v) => {
+  v.muted = true;
+  v.parentElement.addEventListener('click', () => { if (v.paused) tocar(v); });
+  if (reduz) { v.removeAttribute('autoplay'); v.pause(); }
+});
+
 if ('IntersectionObserver' in window) {
   // Item do menu acompanha a seção visível
   const links = [...document.querySelectorAll('.nav__links a')];
@@ -74,14 +87,14 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '-45% 0px -50% 0px' });
   secoes.forEach((s) => sObs.observe(s));
 
-  // Vídeos do portfólio tocam só quando aparecem
+  // Vídeos dos bastidores: tocam quando aparecem; se o celular bloquear, mostra botão de play
   const vObs = new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting }) => {
-      if (isIntersecting && !reduz) { target.preload = 'auto'; target.play().catch(() => {}); }
+      if (isIntersecting && !reduz) tocar(target);
       else target.pause();
     });
-  }, { threshold: 0.35 });
-  document.querySelectorAll('.reel video, .why__media video').forEach((v) => vObs.observe(v));
+  }, { threshold: 0.25 });
+  videos.forEach((v) => vObs.observe(v));
 
   // Entrada suave
   const alvos = document.querySelectorAll('.head, .card, .consult__item, .stats, .why > *, .reel, .gallery img, .clients li, .cta');

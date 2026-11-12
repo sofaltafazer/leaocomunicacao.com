@@ -49,6 +49,9 @@ p { margin: 0 0 1em; }
 .btn--outline { border-color: var(--orange); color: var(--white); }
 .nav .btn--outline, .why .btn--outline { color: var(--orange); }
 .btn--outline:hover { background: var(--orange); color: #fff; transform: translateY(-2px); }
+.btn--wa { background: #25D366; color: #fff; box-shadow: 0 12px 32px -12px rgba(37, 211, 102, .8); }
+.btn--wa:hover { background: #1EBE5B; transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(37, 211, 102, .9); }
+.btn--wa svg { flex: 0 0 auto; }
 
 /* ---------- Cabeçalho ---------- */
 .nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .35s var(--ease), border-color .35s; border-bottom: 1px solid transparent; }
@@ -193,6 +196,14 @@ p { margin: 0 0 1em; }
 .why__text .btn { margin-top: 12px; }
 @media (max-width: 860px) { .why { grid-template-columns: 1fr; } }
 
+/* Vídeo bloqueado (modo economia do celular): toque para tocar */
+.reel.needs-tap, .why__media.needs-tap { cursor: pointer; }
+.reel.needs-tap::after, .why__media.needs-tap::after {
+  content: ""; position: absolute; left: 50%; top: 50%; z-index: 3; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+  background: rgba(242,105,36,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='white'/%3E%3C/svg%3E") center/30px no-repeat;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+
 /* Portfólio */
 .reels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
 .reel { margin: 0; position: relative; overflow: hidden; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
@@ -253,6 +264,8 @@ p { margin: 0 0 1em; }
 .footer p { color: var(--muted); font-size: 15px; margin: 0 0 6px; }
 .footer a { text-decoration: none; }
 .footer a:hover { color: var(--orange); }
+.footer__wa { display: inline-flex; align-items: center; gap: 8px; color: #25D366; font-weight: 700; font-size: 17px; }
+.footer__wa:hover { color: #1EBE5B !important; }
 .footer__label { font-size: 13px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange) !important; margin-bottom: 12px !important; }
 .footer__bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); }
 .footer__bottom p { font-size: 13px; }
